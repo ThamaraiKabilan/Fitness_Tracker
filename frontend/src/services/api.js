@@ -1,15 +1,16 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', 
+  // Dynamically uses the REACT_APP_API_URL from your .env
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api', 
 });
 
-// This sends our JWT token automatically in the header of every request
 API.interceptors.request.use((req) => {
   const userInfo = localStorage.getItem('userInfo');
   if (userInfo) {
     const { token } = JSON.parse(userInfo);
-    req.headers.Authorization = `Bearer ${token}`;
+    // Crucial: This allows Dashboard/Workouts/Meals to be authorized
+    req.headers.Authorization = `Bearer ${token}`; 
   }
   return req;
 });
