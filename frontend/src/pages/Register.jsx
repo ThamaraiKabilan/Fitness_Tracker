@@ -17,7 +17,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await API.post('/auth/register', formData);
+      const { data } = await API.post('/api/auth/register', formData);
       login(data);
       navigate('/dashboard');
     } catch (err) {
@@ -27,9 +27,10 @@ const Register = () => {
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
       // Change 'token' to 'credential' to match your backend controller
-      const { data } = await API.post('/auth/google', {
-        credential: credentialResponse.credential, 
+      const { data } = await API.post('/api/auth/google', {
+        credential: credentialResponse.credential,
       });
+
 
       login(data);
       navigate('/dashboard');
