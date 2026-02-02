@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
-import { Box, Typography, Paper, Card, IconButton, TextField, MenuItem, Chip, LinearProgress } from '@mui/material';
+import { Box, Typography, Paper, IconButton, TextField, MenuItem, Chip, LinearProgress } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Edit, Delete, Lock, History, LocalFireDepartment } from '@mui/icons-material';
+import { Edit, Delete, Lock, History } from '@mui/icons-material';
 import { PieChart, Pie, Cell, ResponsiveContainer, Label } from 'recharts';
 import API from '../services/api';
 import { AuthContext } from '../context/AuthContext';
@@ -32,7 +32,15 @@ const Meals = () => {
     } catch (err) { console.error(err); }
   };
 
-  useEffect(() => { fetchMeals(); }, [dateFilter]);
+  useEffect(() => {
+  const fetchMeals = async () => {
+    // 🔁 paste your existing fetchMeals logic here
+    // axios call / API call / setState etc.
+  };
+
+  fetchMeals();
+}, [dateFilter]);
+
 
   const total = meals.reduce((sum, m) => sum + m.calories, 0);
   const goal = user?.dailyGoal || 2500;

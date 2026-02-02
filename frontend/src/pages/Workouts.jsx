@@ -30,7 +30,15 @@ const Workouts = () => {
     } catch (err) { console.error(err); }
   };
 
-  useEffect(() => { fetchWorkouts(); }, [dateFilter]);
+  useEffect(() => {
+  const fetchWorkouts = async () => {
+    // your existing fetchWorkouts logic here
+    // axios / API call / setState etc.
+  };
+
+  fetchWorkouts();
+}, [dateFilter]);
+
 
   useEffect(() => {
     if (activeTimerIdx !== null) {

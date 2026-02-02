@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, Paper, IconButton, TextField, Typography, Stack, Avatar } from '@mui/material';
-import { Chat, Close, Send, SmartToy, FitnessCenter } from '@mui/icons-material';
+import { Close, Send, SmartToy, FitnessCenter } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
 import API from '../services/api';
 
