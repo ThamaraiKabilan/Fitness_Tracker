@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif !important;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  background-color: #f8fafc;
+}
+
+/* Fix for the Navbar links that turned purple/small */
+.nav-link {
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* Gradients - Fixed to ensure they stay as rounded Rectangles, not Circles */
+.grad-workout { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important; }
+.grad-burned { background: linear-gradient(135deg, #f43f5e 0%, #fb923c 100%) !important; }
+.grad-consumed { background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%) !important; }
+
+/* White text for gradients */
+.grad-workout *, .grad-burned *, .grad-consumed * {
+  color: white !important;
+}
+
+/* Professional Card Style */
+.premium-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.premium-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1) !important;
+}
+
+/* Fix for Tables in Dark Mode */
+.table { color: inherit !important; }
