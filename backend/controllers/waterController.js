@@ -1,4 +1,5 @@
 const Water = require('../models/Water');
+
 exports.updateWater = async (req, res) => {
   try {
     const today = new Date().setHours(0,0,0,0);
@@ -12,6 +13,7 @@ exports.updateWater = async (req, res) => {
     res.json(water);
   } catch (error) { res.status(500).json({ message: error.message }); }
 };
+
 exports.getWater = async (req, res) => {
   try {
     const today = new Date().setHours(0,0,0,0);

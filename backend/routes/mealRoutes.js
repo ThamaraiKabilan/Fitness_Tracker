@@ -5,7 +5,7 @@ const { protect } = require('../middleware/authMiddleware');
 
 router.post('/', protect, addMeal);
 router.get('/', protect, getMeals);
-router.put('/:id', protect, updateMeal); // <--- CHECK THIS LINE
+router.put('/:id', protect, updateMeal);
 router.delete('/:id', protect, deleteMeal);
 
 module.exports = router;

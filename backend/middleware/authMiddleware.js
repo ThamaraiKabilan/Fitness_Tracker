@@ -6,15 +6,16 @@ const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      
-      // Fix: Ensure we set req.user with the id from the token
       req.user = { id: decoded.id }; 
       next();
     } catch (error) {
+      console.error("❌ MIDDLEWARE REJECTED: Token is invalid or expired");
       return res.status(401).json({ message: 'Not authorized, token failed' });
     }
   }
+  
   if (!token) {
+    console.error("❌ MIDDLEWARE REJECTED: No token found in headers");
     return res.status(401).json({ message: 'Not authorized, no token' });
   }
 };

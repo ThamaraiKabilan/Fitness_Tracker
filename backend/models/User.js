@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  dailyGoal: { type: Number, default: 2000 }, // Ensure this line exists!
+  dailyGoal: { type: Number, default: 2000 }, // Ensure this exists
 }, { timestamps: true });
 
 userSchema.pre('save', async function () {

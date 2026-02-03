@@ -3,10 +3,7 @@ const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
-};
+const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 
 exports.registerUser = async (req, res) => {
   try {
@@ -29,20 +26,35 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.googleAuth = async (req, res) => {
-  const { credential } = req.body; // Matches frontend exactly
+  const { credential } = req.body; // Frontend must send this key
+
   try {
     const ticket = await client.verifyIdToken({
       idToken: credential,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
+
     const { name, email } = ticket.getPayload();
     let user = await User.findOne({ email });
+
     if (!user) {
-      user = await User.create({ name, email, password: Math.random().toString(36).slice(-10) });
+      user = await User.create({
+        name,
+        email,
+        password: Math.random().toString(36).slice(-10), 
+      });
     }
-    res.status(200).json({ _id: user._id, name: user.name, email: user.email, dailyGoal: user.dailyGoal, token: generateToken(user._id) });
+
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      dailyGoal: user.dailyGoal || 2000,
+      token: generateToken(user._id),
+    });
   } catch (error) {
-    res.status(400).json({ message: "Google Authentication Failed" });
+    console.error("Google Verification Error:", error.message);
+    res.status(400).json({ message: "Google Auth failed at backend" });
   }
 };
 

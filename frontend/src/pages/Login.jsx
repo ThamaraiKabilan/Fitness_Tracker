@@ -32,20 +32,18 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSuccess = async (credentialResponse) => {
-    setLoading(true);
-    setError('');
+ const handleGoogleSuccess = async (credentialResponse) => {
     try {
+      // Must send the key as 'credential'
       const { data } = await API.post('/auth/google', {
         credential: credentialResponse.credential, 
       });
+
       login(data);
       navigate('/dashboard');
     } catch (error) {
-      console.error("Google Auth Error:", error);
-      setError("Google Sign-In failed. Please try again.");
-    } finally {
-      setLoading(false);
+      console.error("Google Auth Error:", error.response?.data);
+      alert("Google Sign-In failed. Check console for details.");
     }
   };
 

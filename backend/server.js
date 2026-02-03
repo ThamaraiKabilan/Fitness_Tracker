@@ -7,22 +7,28 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const workoutRoutes = require('./routes/workoutRoutes');
 const mealRoutes = require('./routes/mealRoutes');
-const weightRoutes = require('./routes/weightRoutes'); // NEW
+const weightRoutes = require('./routes/weightRoutes');
 const chatRoutes = require('./routes/chatRoutes');
+const waterRoutes = require('./routes/waterRoutes');
 
 const app = express();
 connectDB();
 
-app.use(cors());
+// FIXED CORS: Allow local testing AND Vercel deployment
+app.use(cors({
+  origin: ["http://localhost:3000", "https://fitness-tracker-a7hr.vercel.app"],
+  credentials: true
+}));
+
 app.use(express.json());
 
-// Use Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/meals', mealRoutes);
-app.use('/api/weight', weightRoutes); // NEW
+app.use('/api/weight', weightRoutes);
 app.use('/api/chat', chatRoutes);
-app.get('/', (req, res) => res.send('API is running...'));
+app.use('/api/water', waterRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
